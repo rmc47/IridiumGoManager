@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://iridiumgo.lan/sdk/" name="sdk" targetNamespace="http://iridiumgo.lan/sdk/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://iridiumgo.lan/sdk/">
+      <xsd:complexType name="sdk_user_credentials_t">
+        <xsd:sequence>
+          <xsd:element name="userName" type="xsd:string" />
+          <xsd:element name="password" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_configuration_t">
+        <xsd:sequence>
+          <xsd:element name="tag" type="xsd:string" />
+          <xsd:element name="friendlyName" type="xsd:string" />
+          <xsd:element name="dataType" type="xsd:string" />
+          <xsd:element name="value" type="xsd:string" />
+          <xsd:element name="minValue" type="xsd:string" />
+          <xsd:element name="maxValue" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="tagRequest_t" type="xsd:string" />
+      <xsd:complexType name="sdk_configuration_tagRequest_t">
+        <xsd:sequence>
+          <xsd:element name="tag" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_configuration_set_Result_t">
+        <xsd:sequence>
+          <xsd:element name="tag" type="xsd:string" />
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="message" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="performTaskResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="error" type="xsd:int" />
+            <xsd:element name="errorMessage" type="xsd:string" />
+            <xsd:element name="taskResults" type="xs:sdk_task_perform_Result_t" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="sdk_configuration_requestList_t">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="requestList" type="xs:sdk_configuration_tagRequest_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_task_requestList_t">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="requestList" type="xs:sdk_task_request_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_task_request_t">
+        <xsd:sequence>
+          <xsd:element name="taskID" type="xsd:int" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="options" type="xs:sdk_generic_option_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_task_perform_Result_t">
+        <xsd:sequence>
+          <xsd:element name="taskID" type="xsd:int" />
+          <xsd:element name="responseCode" type="xsd:int" />
+          <xsd:element name="message" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_generic_option_t">
+        <xsd:sequence>
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="value" type="xsd:string" />
+          <xsd:element name="dataType" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_user_details_response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+          <xsd:element name="user" type="xs:sdk_user_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_status_request_t">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="options" type="xs:sdk_generic_option_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_status_get_response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="status" type="xs:sdk_status_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_status_t">
+        <xsd:sequence>
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="value" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_messages_destination_list_t">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="destinationList" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_messages_send_response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+          <xsd:element name="referenceID" type="xsd:unsignedLong" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_messages_retrieve_option_list_t">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="options" type="xs:sdk_generic_option_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_messages_retrieve_response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="messages" type="xs:sdk_messages_incomming_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_messages_incomming_t">
+        <xsd:sequence>
+          <xsd:element name="from" type="xsd:string" />
+          <xsd:element name="message" type="xsd:string" />
+          <xsd:element name="transportType" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_configuration_setRequst_list_t">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="setRequests" type="xs:sdk_configuration_setRequst_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_configuration_setRequst_t">
+        <xsd:sequence>
+          <xsd:element name="tag" type="xsd:string" />
+          <xsd:element name="value" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_user_getList_Response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="users" type="xs:sdk_user_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_user_t">
+        <xsd:sequence>
+          <xsd:element name="userName" type="xsd:string" />
+          <xsd:element name="password" type="xsd:string" />
+          <xsd:element name="outgoingCall" type="xsd:boolean" />
+          <xsd:element name="userPriority" type="xsd:int" />
+          <xsd:element name="sendSms" type="xsd:boolean" />
+          <xsd:element name="receiveSms" type="xsd:boolean" />
+          <xsd:element name="canAccessTwitter" type="xsd:boolean" />
+          <xsd:element name="tracking" type="xsd:boolean" />
+          <xsd:element name="isAdmin" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_user_add_modify_remove_Response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_diagnose_log_get_Response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+          <xsd:element name="log" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_configuration_getSettings_response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="configurations" type="xs:sdk_configuration_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_configuration_setSettings_response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="setResults" type="xs:sdk_configuration_set_Result_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_task_perform_response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="taskResults" type="xs:sdk_task_perform_Result_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_user_basic_info_updateResponse_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_messages_status_response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+          <xsd:element name="msgSentStatus" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_contacts_getList_Response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="contacts" type="xs:sdk_contact_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_contact_t">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="id" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="number" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="isFavourite" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_contact_add_modify_remove_Response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_restorePoint_add_remove_restore_Response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_restorePoint_list_Response_t">
+        <xsd:sequence>
+          <xsd:element name="error" type="xsd:int" />
+          <xsd:element name="errorMessage" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="backupList" type="xs:sdk_restorePoint_data_t" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_restorePoint_data_t">
+        <xsd:sequence>
+          <xsd:element name="backupName" type="xsd:string" />
+          <xsd:element name="userName" type="xsd:string" />
+          <xsd:element name="dateTaken" type="xsd:string" />
+          <xsd:element name="are_version_matched" type="xsd:boolean" />
+          <xsd:element name="firmwareVersion" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="sdk_version_t">
+        <xsd:sequence>
+          <xsd:element name="apiVersion" type="xsd:string" />
+          <xsd:element name="firmwareVersion" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getSettingsRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+    <wsdl:part name="reqList" type="xs:sdk_configuration_requestList_t" />
+  </wsdl:message>
+  <wsdl:message name="getVersionRequest" />
+  <wsdl:message name="getVersionResponse">
+    <wsdl:part name="versionNumber" type="xs:sdk_version_t" />
+  </wsdl:message>
+  <wsdl:message name="setSettingsRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+    <wsdl:part name="setList" type="xs:sdk_configuration_setRequst_list_t" />
+  </wsdl:message>
+  <wsdl:message name="performTaskRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+    <wsdl:part name="taskList" type="xs:sdk_task_requestList_t" />
+  </wsdl:message>
+  <wsdl:message name="performTaskResponse">
+    <wsdl:part name="parameters" type="xs:sdk_task_perform_response_t" />
+  </wsdl:message>
+  <wsdl:message name="getUserDetailsRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+  </wsdl:message>
+  <wsdl:message name="getUserDetailsResponse">
+    <wsdl:part name="login" type="xs:sdk_user_details_response_t" />
+  </wsdl:message>
+  <wsdl:message name="getStatusRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+    <wsdl:part name="request" type="xs:sdk_status_request_t" />
+  </wsdl:message>
+  <wsdl:message name="getStatusResponse">
+    <wsdl:part name="statusOutput" type="xs:sdk_status_get_response_t" />
+  </wsdl:message>
+  <wsdl:message name="getUserListRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+  </wsdl:message>
+  <wsdl:message name="getUserListResponse">
+    <wsdl:part name="getUserListResponse" type="xs:sdk_user_getList_Response_t" />
+  </wsdl:message>
+  <wsdl:message name="addModifyUserRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+    <wsdl:part name="user" type="xs:sdk_user_t" />
+  </wsdl:message>
+  <wsdl:message name="addModifyUserResponse">
+    <wsdl:part name="addModifyUserResponse" type="xs:sdk_user_add_modify_remove_Response_t" />
+  </wsdl:message>
+  <wsdl:message name="removeUserRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+    <wsdl:part name="userName" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="removeUserResponse">
+    <wsdl:part name="removeUserResponse" type="xs:sdk_user_add_modify_remove_Response_t" />
+  </wsdl:message>
+  <wsdl:message name="retrieveLogRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+  </wsdl:message>
+  <wsdl:message name="retrieveLogResponse">
+    <wsdl:part name="logStream" type="xs:sdk_diagnose_log_get_Response_t" />
+  </wsdl:message>
+  <wsdl:message name="getSettingsResponse">
+    <wsdl:part name="configs" type="xs:sdk_configuration_getSettings_response_t" />
+  </wsdl:message>
+  <wsdl:message name="setSettingsResponse">
+    <wsdl:part name="setSettingsResponse" type="xs:sdk_configuration_setSettings_response_t" />
+  </wsdl:message>
+  <wsdl:message name="updateBasicUserInfoRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+    <wsdl:part name="nickName" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateBasicUserInfoResponse">
+    <wsdl:part name="updateBasicUserInfoResponse" type="xs:sdk_user_basic_info_updateResponse_t" />
+  </wsdl:message>
+  <wsdl:message name="getContactListRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+  </wsdl:message>
+  <wsdl:message name="getContactListResponse">
+    <wsdl:part name="contactList" type="xs:sdk_contacts_getList_Response_t" />
+  </wsdl:message>
+  <wsdl:message name="addNewContactRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+    <wsdl:part name="name" type="xsd:string" />
+    <wsdl:part name="number" type="xsd:string" />
+    <wsdl:part name="isFavourite" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="addNewContactResponse">
+    <wsdl:part name="addContactResult" type="xs:sdk_contact_add_modify_remove_Response_t" />
+  </wsdl:message>
+  <wsdl:message name="modifyContactRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+    <wsdl:part name="contact" type="xs:sdk_contact_t" />
+  </wsdl:message>
+  <wsdl:message name="modifyContactResponse">
+    <wsdl:part name="modifyContactResult" type="xs:sdk_contact_add_modify_remove_Response_t" />
+  </wsdl:message>
+  <wsdl:message name="removeContactRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+    <wsdl:part name="contactID" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="removeContactResponse">
+    <wsdl:part name="removeContactResult" type="xs:sdk_contact_add_modify_remove_Response_t" />
+  </wsdl:message>
+  <wsdl:message name="createRestorePointRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+    <wsdl:part name="restorePointName" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="createRestorePointResponse">
+    <wsdl:part name="createRestorePointResult" type="xs:sdk_restorePoint_add_remove_restore_Response_t" />
+  </wsdl:message>
+  <wsdl:message name="removeRestorePointRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+    <wsdl:part name="restorePointName" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="removeRestorePointResponse">
+    <wsdl:part name="createRestorePointResult" type="xs:sdk_restorePoint_add_remove_restore_Response_t" />
+  </wsdl:message>
+  <wsdl:message name="listRestorePointsRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+  </wsdl:message>
+  <wsdl:message name="listRestorePointsResponse">
+    <wsdl:part name="listRestorePointsResult" type="xs:sdk_restorePoint_list_Response_t" />
+  </wsdl:message>
+  <wsdl:message name="restoreFromRestorePointRequest">
+    <wsdl:part name="userCredentials" type="xs:sdk_user_credentials_t" />
+    <wsdl:part name="restorePointName" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="restoreFromRestorePointResponse">
+    <wsdl:part name="restoreFromRestoreResult" type="xs:sdk_restorePoint_add_remove_restore_Response_t" />
+  </wsdl:message>
+  <wsdl:portType name="sdk">
+    <wsdl:operation name="getVersion">
+      <wsdl:input message="xs:getVersionRequest" />
+      <wsdl:output message="xs:getVersionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserDetails">
+      <wsdl:input message="xs:getUserDetailsRequest" />
+      <wsdl:output message="xs:getUserDetailsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getStatus">
+      <wsdl:input message="xs:getStatusRequest" />
+      <wsdl:output message="xs:getStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSettings">
+      <wsdl:input message="xs:getSettingsRequest" />
+      <wsdl:output message="xs:getSettingsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setSettings">
+      <wsdl:input message="xs:setSettingsRequest" />
+      <wsdl:output message="xs:setSettingsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="performTask">
+      <wsdl:input message="xs:performTaskRequest" />
+      <wsdl:output message="xs:performTaskResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserList">
+      <wsdl:input message="xs:getUserListRequest" />
+      <wsdl:output message="xs:getUserListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addModifyUser">
+      <wsdl:input message="xs:addModifyUserRequest" />
+      <wsdl:output message="xs:addModifyUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="removeUser">
+      <wsdl:input message="xs:removeUserRequest" />
+      <wsdl:output message="xs:removeUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getContactList">
+      <wsdl:input message="xs:getContactListRequest" />
+      <wsdl:output message="xs:getContactListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addNewContact">
+      <wsdl:input message="xs:addNewContactRequest" />
+      <wsdl:output message="xs:addNewContactResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="modifyContact">
+      <wsdl:input message="xs:modifyContactRequest" />
+      <wsdl:output message="xs:modifyContactResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="removeContact">
+      <wsdl:input message="xs:removeContactRequest" />
+      <wsdl:output message="xs:removeContactResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="sdkSOAP" type="xs:sdk">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="getVersion">
+      <soap:operation soapAction="http://iridiumgo.lan/sdk/getVersion" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserDetails">
+      <soap:operation soapAction="http://iridiumgo.lan/sdk/getUserDetails" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStatus">
+      <soap:operation soapAction="http://iridiumgo.lan/sdk/getStatus" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSettings">
+      <soap:operation soapAction="http://iridiumgo.lan/sdk/getSettings" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setSettings">
+      <soap:operation soapAction="http://iridiumgo.lan/sdk/setSettings" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="performTask">
+      <soap:operation soapAction="http://iridiumgo.lan/sdk/performTask" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserList">
+      <soap:operation soapAction="http://iridiumgo.lan/sdk/getUserList" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addModifyUser">
+      <soap:operation soapAction="http://iridiumgo.lan/sdk/addModifyUser" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeUser">
+      <soap:operation soapAction="http://iridiumgo.lan/sdk/removeUser" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContactList">
+      <soap:operation soapAction="http://iridiumgo.lan/sdk/getContactList" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addNewContact">
+      <soap:operation soapAction="http://iridiumgo.lan/sdk/addNewContact" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="modifyContact">
+      <soap:operation soapAction="http://iridiumgo.lan/sdk/modifyContact" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="removeContact">
+      <soap:operation soapAction="http://iridiumgo.lan/sdk/removeContact" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://iridiumgo.lan/sdk/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="sdk">
+    <wsdl:port name="sdkSOAP" binding="xs:sdkSOAP">
+      <soap:address location="http://iridiumgo.lan/sdk/sdk.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
