@@ -45,11 +45,11 @@ namespace IridiumGoManager
             const int TASK_INTERNET_CALL = 2;
 
             var connectOption = new sdk_generic_option_t { name = "set state", value = "1", dataType = "boolean" };
-            var firewallNoAllowAll = new sdk_generic_option_t { name = "Firewall allow all traffic", value = "false", dataType = "boolean" };
-            var firewallAllowIridium = new sdk_generic_option_t { name = "Firewall exceptions", value = "94.23.195.56-80-all", dataType = "string" };
-            var firewallNoAllowDns = new sdk_generic_option_t { name = "Enable DNS forwarding", value = "false", dataType = "boolean" };
-            sdk_task_request_t connectRequest = new sdk_task_request_t { taskID = TASK_INTERNET_CALL, options = new sdk_generic_option_t[] { connectOption, firewallNoAllowAll, firewallAllowIridium, firewallNoAllowDns } };
-
+            //var firewallNoAllowAll = new sdk_generic_option_t { name = "Firewall allow all traffic", value = "false", dataType = "boolean" };
+            var firewallAllowIridium = new sdk_generic_option_t { name = "Firewall exceptions", value = "51.255.135.163-all", dataType = "string" };
+            //var firewallNoAllowDns = new sdk_generic_option_t { name = "Enable DNS forwarding", value = "false", dataType = "boolean" };
+            sdk_task_request_t connectRequest = new sdk_task_request_t { taskID = TASK_INTERNET_CALL, options = new sdk_generic_option_t[] { connectOption/*, firewallNoAllowAll, firewallAllowIridium, firewallNoAllowDns */} };
+            
             m_Client.performTask(m_Credentials, new sdk_task_request_t[] { connectRequest });
         }
 
