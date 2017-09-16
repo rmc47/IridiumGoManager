@@ -14,7 +14,7 @@ namespace IridiumGoManager
         private sdk_user_credentials_t m_Credentials = new sdk_user_credentials_t { userName = "guest", password = "guest" };
         static void Main(string[] args)
         {
-            bool result = new Program().ConnectWithRetries(5);
+            bool result = new Program().ConnectWithRetries(10);
         }
 
         private bool ConnectWithRetries(int timesToRetry)
